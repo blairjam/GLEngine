@@ -1,67 +1,66 @@
 #include "Matrixf.hpp"
-#include <exception>
+#include <stdexcept>
 
-Matrixf::Matrixf(unsigned int rows_, unsigned int columns_)
+Matrixf::Matrixf(unsigned int rows, unsigned int cols)
+	: Matrixf(rows, cols, rows * cols)
 {
-	Init(rows_, columns_);
-
-	values.assign(maxValues, 0.0f);
+	values.assign(MAX, 0.0f);
 }
 
-Matrixf::Matrixf(unsigned int rows_, unsigned int columns_, std::vector<float> values_)
+Matrixf::Matrixf(unsigned int rows, unsigned int cols, std::vector<float> vals)
+	: Matrixf(rows, cols, rows * cols)
 {
-	Init(rows_, columns_);
+	values = vals;
+}
 
-	values = values_;
-	values.resize(maxValues);
+Matrixf::Matrixf(unsigned int rows, unsigned int cols, unsigned long max)
+	: ROWS(rows), COLS(cols), MAX(max), transposed(false)
+{
 }
 
 Matrixf::~Matrixf()
 {
 }
 
-void Matrixf::Init(unsigned int rows_, unsigned int columns_)
+void Matrixf::Transpose()
 {
-	rows = rows_;
-	columns = columns_;
-
-	maxValues = rows * columns;
+	transposed = !transposed;
 }
 
 Matrixf Matrixf::operator+(const Matrixf& b) const
 {
-	if (rows != b.rows && columns != b.columns)
+	if (ROWS != b.ROWS && COLS != b.COLS)
 	{
 		throw std::logic_error("Cannot add matricies with different dimensions.");
 	}
 
 	std::vector<float> sums;
 
-	for (unsigned long i = 0; i < maxValues; i++)
+	for (unsigned long i = 0; i < MAX; i++)
 	{
 		sums.push_back(values[i] + b.values[i]);
 	}
 
-	Matrixf result(rows, columns, sums);
+	Matrixf result(ROWS, COLS, sums);
 
 	return result;
 }
 
 Matrixf Matrixf::operator-(const Matrixf& b) const
 {
-	if (rows != b.rows && columns != b.columns)
+	if (ROWS != b.ROWS && COLS != b.COLS)
 	{
 		throw std::logic_error("Cannot add matricies with different dimensions.");
 	}
 
 	std::vector<float> diffs;
 
-	for (unsigned long i = 0; i < maxValues; i++)
+	for (unsigned long i = 0; i < MAX; i++)
 	{
 		diffs.push_back(values[i] - b.values[i]);
 	}
 
-	Matrixf result(rows, columns, diffs);
+	Matrixf result(ROWS, COLS, diffs);
 
 	return result;
 }

@@ -1,5 +1,6 @@
 #include "Window.hpp"
 #include "Shader.hpp"
+#include "Matrixf.hpp"
 #include "GL\glew.h"
 #include "GL\freeglut.h"
 #include <exception>
@@ -7,6 +8,7 @@
 
 int main(int argc, char* argv[])
 {
+	Matrixf mat(3, 2);
 	Window window;
 
 	window.Initialize(argc, argv);
