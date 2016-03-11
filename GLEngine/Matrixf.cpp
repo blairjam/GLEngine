@@ -3,25 +3,25 @@
 #include <string>
 #include <iostream>
 
-Matrixf::Matrixf(uint rows, uint cols)
+Matrixf::Matrixf(const uint rows, const uint cols)
 	: Matrixf(rows, cols, rows * cols)
 {
 	values.assign(MAX, 0.0f);
 }
 
-Matrixf::Matrixf(uint rows, uint cols, std::vector<float> vals)
+Matrixf::Matrixf(const uint rows, const uint cols, const std::vector<float> vals)
 	: Matrixf(rows, cols, rows * cols)
 {
-	values = vals;
+	Assign(vals);
 }
 
-Matrixf::Matrixf(uint rows, uint cols, float vals[])
+Matrixf::Matrixf(const uint rows, const uint cols, const float vals[])
 	: Matrixf(rows, cols, rows * cols)
 {
-	values.assign(vals, vals + MAX);
+	Assign(vals);
 }
 
-Matrixf::Matrixf(uint rows, uint cols, ulong max)
+Matrixf::Matrixf(const uint rows, const uint cols, const ulong max)
 	: ROWS(rows), COLS(cols), MAX(max)
 {
 }
@@ -30,17 +30,15 @@ Matrixf::~Matrixf()
 {
 }
 
-void Matrixf::Print() const 
+void Matrixf::Assign(const std::vector<float> vals)
 {
-	for (uint row = 0; row < ROWS; ++row)
-	{
-		for (uint col = 0; col < COLS; ++col)
-		{
-			std::cout << At(row, col) << " ";
-		}
+	values = vals;
+}
 
-		std::cout << std::endl;
-	}
+void Matrixf::Assign(const float vals[])
+{
+	values.clear();
+	values.assign(vals, vals + MAX);
 }
 
 void Matrixf::Transpose()
@@ -62,9 +60,30 @@ void Matrixf::Transpose()
 	COLS = temp;
 }
 
-float Matrixf::At(uint row, uint col) const
+void Matrixf::Scale(const float scalar)
+{
+	for (ulong index = 0; index < MAX; ++index)
+	{
+		values.at(index) *= scalar;
+	}
+}
+
+float Matrixf::At(const uint row, const uint col) const
 {
 	return values.at((row * COLS) + col);
+}
+
+void Matrixf::Print() const
+{
+	for (uint row = 0; row < ROWS; ++row)
+	{
+		for (uint col = 0; col < COLS; ++col)
+		{
+			std::cout << At(row, col) << " ";
+		}
+
+		std::cout << std::endl;
+	}
 }
 
 Matrixf Matrixf::operator+(const Matrixf& b) const

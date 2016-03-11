@@ -12,16 +12,20 @@ private:
 	const ulong MAX;
 	std::vector<float> values;
 
-	Matrixf(uint, uint, ulong);
+	Matrixf(const uint, const uint, const ulong);
 
 public:
-	Matrixf(uint, uint);
-	Matrixf(uint, uint, std::vector<float>);
-	Matrixf(uint, uint, float[]);
+	Matrixf(const uint, const uint);
+	Matrixf(const uint, const uint, const std::vector<float>);
+	Matrixf(const uint, const uint, const float[]);
 	~Matrixf();
-	void Print() const;
+
+	void Assign(const std::vector<float>);
+	void Assign(const float[]);
 	void Transpose();
-	float At(uint, uint) const;
+	void Scale(const float);
+	float At(const uint, const uint) const;
+	void Print() const;
 
 	inline const uint Rows() const { return ROWS; }
 	inline const uint Columns() const { return COLS; }
