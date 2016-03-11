@@ -8,7 +8,35 @@
 
 int main(int argc, char* argv[])
 {
-	Matrixf mat(3, 2);
+	float aval[] = 
+	{
+		1, 2, 3,
+		4, 5, 6
+	};
+
+	float bval[] = 
+	{
+		7, 8,
+		9, 10,
+		11, 12
+	};
+
+	Matrixf a(2, 3, aval);
+	Matrixf b(3, 2, bval);
+
+	try
+	{
+		Matrixf c = a * b;
+		c.Print();
+		std::cout << "\nTransposing..." << std::endl;
+		c.Transpose();
+		c.Print();
+	}
+	catch (const std::exception& ex)
+	{
+		std::cerr << ex.what() << std::endl;
+	}
+
 	Window window;
 
 	window.Initialize(argc, argv);
