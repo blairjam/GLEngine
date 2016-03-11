@@ -30,10 +30,31 @@ void Vec4::Scale(const float scalar)
 	values.Scale(scalar);
 }
 
+// Normalizes the vector to a magnitude of 1.
+void Vec4::Normalize()
+{
+	const float length = Length();
+
+	float norms[] = { (X() / length), (Y() / length), (Z() / length), (W() / length) };
+
+	values.Assign(norms);
+}
+
 // Prints out the vector value by value.
 void Vec4::Print() const
 {
 	values.Print();
+}
+
+// Finds the magnitude of the vector.
+const float Vec4::Length() const
+{
+	float x = X();
+	float y = Y();
+	float z = Z();
+	float w = W();
+
+	return std::sqrtf((x * x) + (y * y) + (z * z) + (w * w));
 }
 
 // Performs addition of two vectors.

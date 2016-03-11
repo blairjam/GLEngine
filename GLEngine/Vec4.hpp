@@ -1,5 +1,6 @@
 #pragma once
 #include "Matrixf.hpp"
+#include <cmath>
 
 class Vec4
 {
@@ -18,12 +19,14 @@ public:
 	~Vec4();
 
 	void Scale(const float);
+	void Normalize();
 	void Print() const;
 
-	inline const float GetX() const { return values.At(0, COLS - 1); }
-	inline const float GetY() const { return values.At(1, COLS - 1); }
-	inline const float GetZ() const { return values.At(2, COLS - 1); }
-	inline const float GetW() const { return values.At(3, COLS - 1); }
+	const float Length() const;
+	inline const float X() const { return values.At(0, COLS - 1); }
+	inline const float Y() const { return values.At(1, COLS - 1); }
+	inline const float Z() const { return values.At(2, COLS - 1); }
+	inline const float W() const { return values.At(3, COLS - 1); }
 
 	Vec4 operator+(const Vec4&) const;
 	Vec4 operator-(const Vec4&) const;

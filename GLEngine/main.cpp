@@ -8,17 +8,11 @@
 
 int main(int argc, char* argv[])
 {
-	Vec4 vec(1, 2, 3, 4);
-	std::cout << "Normal Vector:" << std::endl;
-	vec.Print();
-
-	vec.Scale(2);
-	std::cout << "\nDoubled Vector: " << std::endl;
-	vec.Print();
+	Vec4 vec(1, 2, 3, 0);
+	std::cout << "Initial magnitude: " << vec.Length() << std::endl;
 	
-	vec.Scale(0.75f);
-	std::cout << "\n1.5 Vector:" << std::endl;
-	vec.Print();
+	vec.Normalize();
+	std::cout << "Normalized magnitude: " << vec.Length() << std::endl;
 
 	Window window;
 
