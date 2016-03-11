@@ -1,9 +1,11 @@
 #include "Vec4.hpp"
 
+// Constructs object with all values assigned to 0.
 Vec4::Vec4() : Vec4(0.0f, 0.0f, 0.0f, 0.0f)
 {
 }
 
+// Constructs object with values assigned to given values.
 Vec4::Vec4(const float x, const float y, const float z, const float w)
 	: values(ROWS, COLS)
 {
@@ -12,6 +14,7 @@ Vec4::Vec4(const float x, const float y, const float z, const float w)
 	values.Assign(vals);
 }
 
+// Constructs object with values assigned to given Matrixf object.
 Vec4::Vec4(Matrixf vals)
 	: values(vals)
 {
@@ -21,42 +24,26 @@ Vec4::~Vec4()
 {
 }
 
+// Performs scalar multiplication on the vector.
 void Vec4::Scale(const float scalar)
 {
 	values.Scale(scalar);
 }
 
+// Prints out the vector value by value.
 void Vec4::Print() const
 {
 	values.Print();
 }
 
-const float Vec4::GetX() const
-{
-	return values.At(0, COLS - 1);
-}
-
-const float Vec4::GetY() const
-{
-	return values.At(1, COLS - 1);
-}
-
-const float Vec4::GetZ() const
-{
-	return values.At(2, COLS - 1);
-}
-
-const float Vec4::GetW() const
-{
-	return values.At(3, COLS - 1);
-}
-
+// Performs addition of two vectors.
 Vec4 Vec4::operator+(const Vec4& b) const
 {
 	Vec4 summed(values + b.values);
 	return summed;
 }
 
+// Performs subtraction of two vectors.
 Vec4 Vec4::operator-(const Vec4& b) const
 {
 	Vec4 differenced(values - b.values);

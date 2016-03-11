@@ -24,9 +24,10 @@ public:
 	void Assign(const float[]);
 	void Transpose();
 	void Scale(const float);
-	float At(const uint, const uint) const;
 	void Print() const;
 
+	// Return value at given index.
+	inline const float At(const uint row, const uint col) const { return values.at((row * COLS) + col); }
 	inline const uint Rows() const { return ROWS; }
 	inline const uint Columns() const { return COLS; }
 	inline const ulong MaxElements() const { return MAX; }

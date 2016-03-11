@@ -20,10 +20,10 @@ public:
 	void Scale(const float);
 	void Print() const;
 
-	const float GetX() const;
-	const float GetY() const;
-	const float GetZ() const;
-	const float GetW() const;
+	inline const float GetX() const { return values.At(0, COLS - 1); }
+	inline const float GetY() const { return values.At(1, COLS - 1); }
+	inline const float GetZ() const { return values.At(2, COLS - 1); }
+	inline const float GetW() const { return values.At(3, COLS - 1); }
 
 	Vec4 operator+(const Vec4&) const;
 	Vec4 operator-(const Vec4&) const;
