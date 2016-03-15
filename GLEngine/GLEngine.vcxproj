@@ -155,12 +155,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrixf.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Vec.cpp" />
     <ClCompile Include="Vec4.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Matrixf.hpp" />
     <ClInclude Include="Shader.hpp" />
+    <ClInclude Include="Vec.hpp" />
     <ClInclude Include="Vec4.hpp" />
     <ClInclude Include="Window.hpp" />
   </ItemGroup>

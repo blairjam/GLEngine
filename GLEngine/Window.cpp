@@ -5,7 +5,7 @@
 #include <iostream>
 #include <memory>
 
-Window* Instance = nullptr;
+gle::Window* Instance = nullptr;
 
 extern "C" void ResizeFunction(int width, int height)
 {
@@ -27,16 +27,16 @@ extern "C" void TimerFunction(int value)
 	Instance->Timer(value);
 }
 
-Window::Window()
+gle::Window::Window()
 {
 	Instance = this;
 }
 
-Window::~Window()
+gle::Window::~Window()
 {
 }
 
-void Window::Initialize(int argc, char* argv[])
+void gle::Window::Initialize(int argc, char* argv[])
 {
 	GLenum glewInitResult;
 
@@ -55,7 +55,7 @@ void Window::Initialize(int argc, char* argv[])
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
-void Window::InitWindow(int argc, char* argv[])
+void gle::Window::InitWindow(int argc, char* argv[])
 {
 	glutInit(&argc, argv);
 
@@ -87,7 +87,7 @@ void Window::InitWindow(int argc, char* argv[])
 	glutTimerFunc(0, TimerFunction, 0);
 }
 
-void Window::Resize(int width, int height)
+void gle::Window::Resize(int width, int height)
 {
 	currentWidth = width;
 	currentHeight = height;
@@ -95,7 +95,7 @@ void Window::Resize(int width, int height)
 	glViewport(0, 0, currentWidth, currentHeight);
 }
 
-void Window::Render()
+void gle::Window::Render()
 {
 	++frameCount;
 
@@ -105,12 +105,12 @@ void Window::Render()
 	glutPostRedisplay();
 }
 
-void Window::Idle()
+void gle::Window::Idle()
 {
 	glutPostRedisplay();
 }
 
-void Window::Timer(int value)
+void gle::Window::Timer(int value)
 {
 	if (value != 0)
 	{

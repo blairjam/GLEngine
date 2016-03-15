@@ -1,34 +1,24 @@
 #pragma once
+#include "Vec.hpp"
 #include "Matrixf.hpp"
-#include <cmath>
 
-class Vec4
+namespace gle
 {
-private:
-	typedef unsigned int uint;
+	class Vec4 : public Vec
+	{
+	private:
+		Vec4(Matrixf);
 
-	static const uint ROWS = 4u;
-	static const uint COLS = 1u;
-	Matrixf values;
+	public:
+		static const uint COMPONENTS = 4u;
 
-	Vec4(Matrixf);
+		Vec4();
+		Vec4(const float, const float, const float, const float);
+		~Vec4();
 
-public:
-	Vec4();
-	Vec4(const float, const float, const float, const float);
-	~Vec4();
-
-	void Scale(const float);
-	void Normalize();
-	void Print() const;
-
-	const float Length() const;
-	inline const float X() const { return values.At(0, COLS - 1); }
-	inline const float Y() const { return values.At(1, COLS - 1); }
-	inline const float Z() const { return values.At(2, COLS - 1); }
-	inline const float W() const { return values.At(3, COLS - 1); }
-
-	Vec4 operator+(const Vec4&) const;
-	Vec4 operator-(const Vec4&) const;
-};
-
+		inline const float X() const { return values.At(0, 0); }
+		inline const float Y() const { return values.At(1, 0); }
+		inline const float Z() const { return values.At(2, 0); }
+		inline const float W() const { return values.At(3, 0); }
+	};
+}

@@ -3,11 +3,11 @@
 #include <exception>
 #include <iostream>
 
-Shader::Shader(GLenum type) : Shader(type, "")
+gle::Shader::Shader(GLenum type) : Shader(type, "")
 {
 }
 
-Shader::Shader(GLenum type, std::string path)
+gle::Shader::Shader(GLenum type, std::string path)
 {
 	shaderType = type;
 	id = 0;
@@ -18,23 +18,23 @@ Shader::Shader(GLenum type, std::string path)
 	}
 }
 
-Shader::~Shader()
+gle::Shader::~Shader()
 {
 	DestroyShader();
 }
 
-void Shader::Create(std::string path)
+void gle::Shader::Create(std::string path)
 {
 	ReadFile(path);
 	CreateShader();
 }
 
-const GLuint Shader::GetId() const
+const GLuint gle::Shader::GetId() const
 {
 	return id;
 }
 
-unsigned long Shader::CalculateFileLength(std::ifstream& file)
+unsigned long gle::Shader::CalculateFileLength(std::ifstream& file)
 {
 	unsigned long length = 0;
 
@@ -48,7 +48,7 @@ unsigned long Shader::CalculateFileLength(std::ifstream& file)
 	return length;
 }
 
-void Shader::ReadFile(std::string path)
+void gle::Shader::ReadFile(std::string path)
 {
 	std::ifstream file;
 
@@ -78,7 +78,7 @@ void Shader::ReadFile(std::string path)
 	file.close();
 }
 
-void Shader::CreateShader()
+void gle::Shader::CreateShader()
 {
 	GLenum errorCheckValue = glGetError();
 
@@ -111,7 +111,7 @@ void Shader::CreateShader()
 	}
 }
 
-void Shader::DestroyShader()
+void gle::Shader::DestroyShader()
 {
 	GLenum errorCheckValue = glGetError();
 

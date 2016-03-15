@@ -4,52 +4,52 @@
 #include <iostream>
 
 // Construct object with all values assigned to 0.
-Matrixf::Matrixf(const uint rows, const uint cols)
+gle::Matrixf::Matrixf(const uint rows, const uint cols)
 	: Matrixf(rows, cols, rows * cols)
 {
 	values.assign(MAX, 0.0f);
 }
 
 // Construct object with values assigned to given vector.
-Matrixf::Matrixf(const uint rows, const uint cols, const std::vector<float> vals)
+gle::Matrixf::Matrixf(const uint rows, const uint cols, const std::vector<float> vals)
 	: Matrixf(rows, cols, rows * cols)
 {
 	Assign(vals);
 }
 
 // Construct object with values assigned to given array.
-Matrixf::Matrixf(const uint rows, const uint cols, const float vals[])
+gle::Matrixf::Matrixf(const uint rows, const uint cols, const float vals[])
 	: Matrixf(rows, cols, rows * cols)
 {
 	Assign(vals);
 }
 
 // Private constructor that assigns ROWS, COLS, and MAX members.
-Matrixf::Matrixf(const uint rows, const uint cols, const ulong max)
+gle::Matrixf::Matrixf(const uint rows, const uint cols, const ulong max)
 	: ROWS(rows), COLS(cols), MAX(max)
 {
 }
 
-Matrixf::~Matrixf()
+gle::Matrixf::~Matrixf()
 {
 }
 
 // Assign values to given vector.
-void Matrixf::Assign(const std::vector<float> vals)
+void gle::Matrixf::Assign(const std::vector<float> vals)
 {
 	values = vals;
 	values.resize(MAX, 0.0f);
 }
 
 // Assign values to given array.
-void Matrixf::Assign(const float vals[])
+void gle::Matrixf::Assign(const float vals[])
 {
 	values.clear();
 	values.assign(vals, vals + MAX);
 }
 
 // Transpose the matrix.
-void Matrixf::Transpose()
+void gle::Matrixf::Transpose()
 {
 	std::vector<float> transposed;
 
@@ -75,7 +75,7 @@ void Matrixf::Transpose()
 }
 
 // Performs scalar multiplication on the matrix.
-void Matrixf::Scale(const float scalar)
+void gle::Matrixf::Scale(const float scalar)
 {
 	// Multiply each value by given scalar.
 	for (ulong index = 0; index < MAX; ++index)
@@ -85,7 +85,7 @@ void Matrixf::Scale(const float scalar)
 }
 
 // Prints the matrix out row by row.
-void Matrixf::Print() const
+void gle::Matrixf::Print() const
 {
 	for (uint row = 0; row < ROWS; ++row)
 	{
@@ -99,7 +99,7 @@ void Matrixf::Print() const
 }
 
 // Performs matrix addition on two matricies.
-Matrixf Matrixf::operator+(const Matrixf& b) const
+gle::Matrixf gle::Matrixf::operator+(const Matrixf& b) const
 {
 	// Throw logic error if matricies are not the same size.
 	if (ROWS != b.ROWS && COLS != b.COLS)
@@ -122,7 +122,7 @@ Matrixf Matrixf::operator+(const Matrixf& b) const
 }
 
 // Performs matrix subtraction on two matricies.
-Matrixf Matrixf::operator-(const Matrixf& b) const
+gle::Matrixf gle::Matrixf::operator-(const Matrixf& b) const
 {
 	// Throw logic error if matricies are not the same size.
 	if (ROWS != b.ROWS && COLS != b.COLS)
@@ -145,7 +145,7 @@ Matrixf Matrixf::operator-(const Matrixf& b) const
 }
 
 // Performs matrix multiplication on two matricies.
-Matrixf Matrixf::operator*(const Matrixf& b) const
+gle::Matrixf gle::Matrixf::operator*(const Matrixf& b) const
 {
 	// Throws logic error if sizes are now valid for multiplication.
 	if (COLS != b.ROWS)

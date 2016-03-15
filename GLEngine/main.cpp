@@ -8,18 +8,18 @@
 
 int main(int argc, char* argv[])
 {
-	Vec4 vec(1, 2, 3, 0);
+	gle::Vec4 vec(1, 2, 3, 0);
 	std::cout << "Initial magnitude: " << vec.Length() << std::endl;
 	
 	vec.Normalize();
 	std::cout << "Normalized magnitude: " << vec.Length() << std::endl;
 
-	Window window;
+	gle::Window window;
 
 	window.Initialize(argc, argv);
 
-	Shader vertex(GL_VERTEX_SHADER);
-	Shader fragment(GL_FRAGMENT_SHADER);
+	gle::Shader vertex(GL_VERTEX_SHADER);
+	gle::Shader fragment(GL_FRAGMENT_SHADER);
 	try
 	{
 		vertex.Create("../GLEngine/simple.vert");
