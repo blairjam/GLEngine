@@ -1,5 +1,5 @@
 #pragma once
-#include "Matrixf.hpp"
+#include "Matrix.hpp"
 
 namespace gle
 {
@@ -10,9 +10,9 @@ namespace gle
 
 		const uint ELEMENTS;
 		const uint COLS;
-		Matrixf values;
+		Matrix<float> values;
 
-		Vec(uint, Matrixf);
+		Vec(uint, Matrix<float>);
 
 	public:
 		Vec(uint);

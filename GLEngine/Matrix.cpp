@@ -1,57 +1,57 @@
-#include "Matrixf.hpp"
+#include "Matrix.hpp"
 #include <stdexcept>
 #include <string>
 #include <iostream>
 
 // Construct object with all values assigned to 0.
-gle::Matrixf::Matrixf(const uint rows, const uint cols)
-	: Matrixf(rows, cols, rows * cols)
+template<class T> gle::Matrix<T>::Matrix(const uint rows, const uint cols)
+	: Matrix(rows, cols, rows * cols)
 {
-	values.assign(MAX, 0.0f);
+	values.assign(MAX, 0);
 }
 
 // Construct object with values assigned to given vector.
-gle::Matrixf::Matrixf(const uint rows, const uint cols, const std::vector<float> vals)
-	: Matrixf(rows, cols, rows * cols)
+template<class T> gle::Matrix<T>::Matrix(const uint rows, const uint cols, const std::vector<T> vals)
+	: Matrix(rows, cols, rows * cols)
 {
 	Assign(vals);
 }
 
 // Construct object with values assigned to given array.
-gle::Matrixf::Matrixf(const uint rows, const uint cols, const float vals[])
-	: Matrixf(rows, cols, rows * cols)
+template<class T> gle::Matrix<T>::Matrix(const uint rows, const uint cols, const T vals[])
+	: Matrix(rows, cols, rows * cols)
 {
 	Assign(vals);
 }
 
 // Private constructor that assigns ROWS, COLS, and MAX members.
-gle::Matrixf::Matrixf(const uint rows, const uint cols, const ulong max)
+template<class T> gle::Matrix<T>::Matrix(const uint rows, const uint cols, const ulong max)
 	: ROWS(rows), COLS(cols), MAX(max)
 {
 }
 
-gle::Matrixf::~Matrixf()
+template<class T> gle::Matrix<T>::~Matrix()
 {
 }
 
 // Assign values to given vector.
-void gle::Matrixf::Assign(const std::vector<float> vals)
+template<class T> void gle::Matrix<T>::Assign(const std::vector<T> vals)
 {
 	values = vals;
-	values.resize(MAX, 0.0f);
+	values.resize(MAX, 0);
 }
 
 // Assign values to given array.
-void gle::Matrixf::Assign(const float vals[])
+template<class T> void gle::Matrix<T>::Assign(const T vals[])
 {
 	values.clear();
 	values.assign(vals, vals + MAX);
 }
 
 // Transpose the matrix.
-void gle::Matrixf::Transpose()
+template<class T> void gle::Matrix<T>::Transpose()
 {
-	std::vector<float> transposed;
+	std::vector<T> transposed;
 
 	// Finds the location of all values in the transposed matrix.
 	for (ulong index = 0; index < MAX; ++index)
@@ -75,7 +75,7 @@ void gle::Matrixf::Transpose()
 }
 
 // Performs scalar multiplication on the matrix.
-void gle::Matrixf::Scale(const float scalar)
+template<class T> void gle::Matrix<T>::Scale(const T scalar)
 {
 	// Multiply each value by given scalar.
 	for (ulong index = 0; index < MAX; ++index)
@@ -85,7 +85,7 @@ void gle::Matrixf::Scale(const float scalar)
 }
 
 // Prints the matrix out row by row.
-void gle::Matrixf::Print() const
+template<class T> void gle::Matrix<T>::Print() const
 {
 	for (uint row = 0; row < ROWS; ++row)
 	{
@@ -99,7 +99,7 @@ void gle::Matrixf::Print() const
 }
 
 // Performs matrix addition on two matricies.
-gle::Matrixf gle::Matrixf::operator+(const Matrixf& b) const
+template<class T> gle::Matrix<T> gle::Matrix<T>::operator+(const Matrix<T>& b) const
 {
 	// Throw logic error if matricies are not the same size.
 	if (ROWS != b.ROWS && COLS != b.COLS)
@@ -108,7 +108,7 @@ gle::Matrixf gle::Matrixf::operator+(const Matrixf& b) const
 	}
 
 	// Vector to hold sums.
-	std::vector<float> sums;
+	std::vector<T> sums;
 
 	// Add the corresponding values of each matrix.
 	for (ulong i = 0; i < MAX; i++)
@@ -117,12 +117,12 @@ gle::Matrixf gle::Matrixf::operator+(const Matrixf& b) const
 	}
 
 	// Create and return new matrix.
-	Matrixf result(ROWS, COLS, sums);
+	Matrix<T> result(ROWS, COLS, sums);
 	return result;
 }
 
 // Performs matrix subtraction on two matricies.
-gle::Matrixf gle::Matrixf::operator-(const Matrixf& b) const
+template<class T> gle::Matrix<T> gle::Matrix<T>::operator-(const Matrix<T>& b) const
 {
 	// Throw logic error if matricies are not the same size.
 	if (ROWS != b.ROWS && COLS != b.COLS)
@@ -131,7 +131,7 @@ gle::Matrixf gle::Matrixf::operator-(const Matrixf& b) const
 	}
 
 	// Vector to hold differences.
-	std::vector<float> diffs;
+	std::vector<T> diffs;
 
 	// Subtract the corresponding values of each matrix.
 	for (ulong i = 0; i < MAX; i++)
@@ -140,12 +140,12 @@ gle::Matrixf gle::Matrixf::operator-(const Matrixf& b) const
 	}
 
 	// Create and return new matrix.
-	Matrixf result(ROWS, COLS, diffs);
+	Matrix<T> result(ROWS, COLS, diffs);
 	return result;
 }
 
 // Performs matrix multiplication on two matricies.
-gle::Matrixf gle::Matrixf::operator*(const Matrixf& b) const
+template<class T> gle::Matrix<T> gle::Matrix<T>::operator*(const Matrix<T>& b) const
 {
 	// Throws logic error if sizes are now valid for multiplication.
 	if (COLS != b.ROWS)
@@ -155,7 +155,7 @@ gle::Matrixf gle::Matrixf::operator*(const Matrixf& b) const
 	}
 
 	// Vector to hold multiplied values.
-	std::vector<float> newValues;
+	std::vector<T> newValues;
 
 	// Iterate over the rows of matrix A.
 	for (uint aRows = 0; aRows < ROWS; ++aRows)
@@ -163,7 +163,7 @@ gle::Matrixf gle::Matrixf::operator*(const Matrixf& b) const
 		// Iterate over the columns of matrix B.
 		for (uint bCols = 0; bCols < b.COLS; ++bCols)
 		{
-			float sum = 0.0f;
+			T sum = 0;
 
 			// Iterate over each value of A's row and B's column.
 			for (uint common = 0; common < COLS; ++common)
@@ -178,6 +178,17 @@ gle::Matrixf gle::Matrixf::operator*(const Matrixf& b) const
 	}
 
 	// Create and return the new matrix.
-	Matrixf result(ROWS, b.COLS, newValues);
+	Matrix<T> result(ROWS, b.COLS, newValues);
 	return result;
 }
+
+// Represents possible types the Matrix class may be constructed with.
+template class gle::Matrix<int>;
+template class gle::Matrix<unsigned int>;
+template class gle::Matrix<long>;
+template class gle::Matrix<unsigned long>;
+template class gle::Matrix<long long>;
+template class gle::Matrix<unsigned long long>;
+template class gle::Matrix<float>;
+template class gle::Matrix<double>;
+template class gle::Matrix<long double>;

@@ -1,13 +1,13 @@
 #pragma once
 #include "Vec.hpp"
-#include "Matrixf.hpp"
+#include "Matrix.hpp"
 
 namespace gle
 {
 	class Vec4 : public Vec
 	{
 	private:
-		Vec4(Matrixf);
+		Vec4(Matrix<float>);
 
 	public:
 		static const uint COMPONENTS = 4u;

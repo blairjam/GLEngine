@@ -1,7 +1,7 @@
 #include "Vec4.hpp"
 
 // Constructs object with values assigned to given Matrixf object.
-gle::Vec4::Vec4(Matrixf vals)
+gle::Vec4::Vec4(Matrix<float> vals)
 	: Vec(COMPONENTS, vals)
 {
 }

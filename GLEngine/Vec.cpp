@@ -2,7 +2,7 @@
 #include <vector>
 #include <cmath>
 
-gle::Vec::Vec(uint elements, Matrixf vals)
+gle::Vec::Vec(uint elements, Matrix<float> vals)
 	: ELEMENTS(elements), COLS(1u), values(vals)
 {
 }
